@@ -1,0 +1,22 @@
+db:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: registry.zha.ooclit.cn/os/mongo:3.2.5
+  volumes:
+  - /home/csapp/ita-welfare/NJS_DOM_WF/db:/data/db
+  stdin_open: true
+web:
+  environment:
+    DB_1_PORT_27017_TCP_ADDR: db
+    PORT: '3000'
+  command:
+    - start
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: registry.zha.ooclit.cn/app/ita-welfare/NJS_DOM_WF
+  volumes:
+    - /nfsshare/ita-welfare/NJS_DOM_WF/web/uploads/user/images:/home/mean/app/views/uploads/user/images
+  links:
+  - db:db

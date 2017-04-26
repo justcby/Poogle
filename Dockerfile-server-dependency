@@ -1,0 +1,11 @@
+FROM registry.zha.ooclit.com/server/node-4.4.5-base:latest
+MAINTAINER "David JW Lin" David.J.W.Lin@oocl.com
+
+RUN mkdir -p /home/welfare
+WORKDIR /home/welfare
+
+# Install npm json 
+ADD package.json package.json
+
+# Install npm packages
+RUN npm install -g gulp && npm install --quiet --config.interactive=false && npm cache clean
